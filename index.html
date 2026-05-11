@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katti Elleres — Mentoria para Mulheres Empreendedoras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #0D1F14;
+  --verde-mid: #122018;
+  --verde-card: #162A1C;
+  --verde-border: rgba(255,255,255,0.07);
+  --ouro: #C9A350;
+  --ouro-light: #E2BC72;
+  --ouro-pale: rgba(201,163,80,0.15);
+  --creme: #F5EDD8;
+  --texto: rgba(245,237,216,0.75);
+  --radius: 4px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--verde);
+  color: var(--creme);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+@media (min-width: 768px) { .container { padding: 0 40px; } }
+@media (min-width: 1024px) { .container { padding: 0 72px; } }
+
+.section { padding: 64px 0; }
+@media (min-width: 768px) { .section { padding: 100px 0; } }
+
+.s-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ouro); margin-bottom: 12px; display: block;
+}
+.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 5vw, 48px); font-weight: 400; line-height: 1.1;
+  color: var(--creme); margin-bottom: 16px;
+}
+.s-title em { font-style: italic; color: var(--ouro); }
+.s-body {
+  font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--texto); max-width: 540px;
+}
+@media (min-width: 768px) { .s-body { font-size: 14px; } }
+
+/* NAVBAR */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(13,31,20,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--verde-border);
+  transition: var(--transition);
+}
+nav.scrolled { padding: 10px 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 400; color: var(--creme);
+  letter-spacing: 2px;
+}
+
+.nav-links { display: none; list-style: none; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(245,237,216,0.6); transition: var(--transition);
+}
+.nav-links a:hover { color: var(--ouro); }
+
+@media (min-width: 1024px) { .nav-links { display: flex; } }
+
+#hamburger {
+  display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 5px;
+}
+#hamburger span {
+  width: 22px; height: 2px; background: var(--creme); transition: var(--transition);
+  transform-origin: center;
+}
+#hamburger.active span:first-child { transform: rotate(45deg) translateY(5px); }
+#hamburger.active span:nth-child(2) { opacity: 0; }
+#hamburger.active span:last-child { transform: rotate(-45deg) translateY(-5px); }
+@media (min-width: 1024px) { #hamburger { display: none; } }
+
+#navMobile {
+  position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+  background: rgba(13,31,20,0.98); backdrop-filter: blur(20px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px; opacity: 0; pointer-events: none; transition: var(--transition);
+}
+#navMobile.active { opacity: 1; pointer-events: auto; }
+#navMobile a {
+  font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--creme);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 100px 0 60px; position: relative; overflow: hidden;
+}
+
+.hero-content {
+  display: flex; flex-direction: column; gap: 32px;
+  max-width: 600px;
+}
+
+.hero-overline {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ouro);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 7vw, 56px); font-weight: 400;
+  line-height: 1.1; color: var(--creme);
+}
+
+.hero-title em { font-style: italic; color: var(--ouro); }
+
+.hero-body {
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: var(--texto); max-width: 480px;
+}
+
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 32px; background: var(--ouro); color: var(--verde);
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; border-radius: var(--radius);
+  transition: var(--transition); width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--ouro-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,163,80,0.3);
+}
+
+/* PAIN POINTS */
+.pain-points {
+  background: var(--verde-mid);
+}
+
+.pain-grid {
+  display: grid; gap: 16px;
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .pain-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+
+.pain-card {
+  background: var(--verde-card); border: 1px solid var(--verde-border);
+  border-radius: var(--radius); padding: 24px;
+  transition: var(--transition);
+}
+
+.pain-card:hover {
+  border-color: var(--ouro); transform: translateY(-4px);
+}
+
+.pain-icon {
+  font-size: 24px; margin-bottom: 12px; color: var(--ouro);
+}
+
+.pain-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 400; color: var(--creme);
+  margin-bottom: 8px;
+}
+
+.pain-desc {
+  font-size: 12px; font-weight: 300; color: var(--texto);
+  line-height: 1.7;
+}
+
+/* SOLUTION */
+.solution {
+  background: linear-gradient(180deg, var(--verde-mid) 0%, var(--verde) 100%);
+}
+
+.solution-grid {
+  display: grid; gap: 32px; margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .solution-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.solution-item {
+  display: flex; gap: 20px; align-items: flex-start;
+}
+
+.solution-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; color: var(--ouro);
+  line-height: 1; opacity: 0.5;
+}
+
+.solution-text h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 400; color: var(--creme);
+  margin-bottom: 8px;
+}
+
+.solution-text p {
+  font-size: 12px; font-weight: 300; color: var(--texto);
+  line-height: 1.7;
+}
+
+/* TESTIMONIAL */
+.testimonial {
+  background: var(--verde);
+  text-align: center;
+}
+
+.testimonial-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 4vw, 32px); font-weight: 400;
+  font-style: italic; color: var(--creme);
+  line-height: 1.5; max-width: 800px; margin: 0 auto 24px;
+}
+
+.testimonial-author {
+  font-size: 12px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ouro);
+}
+
+/* CTA SECTION */
+.cta-section {
+  background: linear-gradient(180deg, var(--verde) 0%, var(--verde-mid) 100%);
+  text-align: center; padding: 80px 0;
+}
+
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 5vw, 40px); font-weight: 400;
+  color: var(--creme); margin-bottom: 16px;
+}
+
+.cta-body {
+  font-size: 14px; font-weight: 300; color: var(--texto);
+  max-width: 500px; margin: 0 auto 32px;
+}
+
+.cta-button {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 40px; background: var(--ouro); color: var(--verde);
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.cta-button:hover {
+  background: var(--ouro-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,163,80,0.3);
+}
+
+/* FOOTER */
+footer {
+  background: var(--verde-mid);
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid var(--verde-border);
+}
+
+.f-copy {
+  font-size: 11px; font-weight: 300; color: var(--texto);
+  margin-bottom: 16px;
+}
+
+.f-links {
+  display: flex; justify-content: center; gap: 24px;
+  list-style: none;
+}
+
+.f-links a {
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(245,237,216,0.5);
+  transition: var(--transition);
+}
+
+.f-links a:hover { color: var(--ouro); }
+
+/* REVEAL ANIMATION */
+.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.vis { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">Katti Elleres</a>
+  <button id="hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="#o-peso">O Peso</a></li>
+    <li><a href="#a-jornada">A Jornada</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <div id="navMobile">
+    <a href="#o-peso">O Peso</a>
+    <a href="#a-jornada">A Jornada</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content reveal">
+      <span class="hero-overline">Para Mulheres Empreendedoras</span>
+      <h1 class="hero-title">Você construiu um negócio, mas <em>perdeu você</em> no caminho?</h1>
+      <p class="hero-body">
+        O sucesso chegou, mas você não sente que é seu. A exaustão é constante. 
+        A identidade se dissolveu entre papéis — mãe, esposa, empresária, gestora. 
+        E agora você quer crescer, mas sem se perder de novo.
+      </p>
+      <a href="#contato" class="hero-cta">
+        Quero me reconectar com quem eu sou
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="pain-points section" id="o-peso">
+  <div class="container">
+    <span class="s-label reveal">O que você está carregando</span>
+    <h2 class="s-title reveal">Dores que <em>não se falam</em> em reunião</h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-icon">😔</div>
+        <h3 class="pain-title">Exaustão emocional</h3>
+        <p class="pain-desc">Não é cansaço físico — é cansaço de alma. Você dá o tempo todo, mas ninguém reabastece seu tanque. Está vazia por dentro enquanto tudo parece cheio por fora.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">🪞</div>
+        <h3 class="pain-title">Perda de identidade</h3>
+        <p class="pain-desc">Quem você era antes do negócio? Você não sabe mais. Seu nome agora é "dona da empresa", "mãe de", "esposa de". Mas onde está você nessa história?</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">🔄</div>
+        <h3 class="pain-title">Desejo de reposicionamento</h3>
+        <p class="pain-desc">Você sente que precisa mudar, mas não sabe para onde. O negócio te serviu até aqui, mas agora ele te limita. Você quer mais, mas não consegue visualizar.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">⚖️</div>
+        <h3 class="pain-title">Crescer vs. se perder</h3>
+        <p class="pain-desc">Você quer expandir, mas tem medo de se perder ainda mais. Mais negócio = menos vida? Mais sucesso = menos você? Esse cálculo não fecha.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">🎭</div>
+        <h3 class="pain-title">A máscara da mulher forte</h3>
+        <p class="pain-desc">Você aprendeu a não demonstrar fraqueza. Então segura tudo, engole choro, finge que aguenta. Por fora, uma empresária de sucesso. Por dentro, uma mulher se fragmentando.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">💸</div>
+        <h3 class="pain-title">Sucesso sem plenitude</h3>
+        <p class="pain-desc">O faturamento subiu, mas a alegria não. Você alcançou metas que outros sonham, mas acorda sem sentido. Sucesso de papel, vazio de alma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution section" id="a-jornada">
+  <div class="container">
+    <span class="s-label reveal">O que você vai viver</span>
+    <h2 class="s-title reveal">Mentoria que <em>reconecta</em> mulher e negócio</h2>
+    <div class="solution-grid">
+      <div class="solution-item reveal">
+        <span class="solution-num">01</span>
+        <div class="solution-text">
+          <h4>Transformação de dentro pra fora</h4>
+          <p>Não é sobre mudar o que você faz. É sobre resgatar quem você é. Você se reconecta com sua essência — e de lá, reconstrói o negócio.</p>
+        </div>
+      </div>
+      <div class="solution-item reveal">
+        <span class="solution-num">02</span>
+        <div class="solution-text">
+          <h4>Posicionamento que representa você</h4>
+          <p>Uma marca que é extensão da sua identidade, não substituição. O negócio te serve, não o contrário. Crescimento que inclui sua presença.</p>
+        </div>
+      </div>
+      <div class="solution-item reveal">
+        <span class="solution-num">03</span>
+        <div class="solution-text">
+          <h4>Reconexão pessoal profunda</h4>
+          <p>Voltar a se reconhecer no espelho. Aprender a se ouvir, se respeitar, se escolher. Você volta a ser protagonista da sua vida.</p>
+        </div>
+      </div>
+      <div class="solution-item reveal">
+        <span class="solution-num">04</span>
+        <div class="solution-text">
+          <h4>Direcionamento com alma</h4>
+          <p>Clareza sobre o próximo passo — mas que vem de um lugar de verdade, não de obrigação. Decisões alinhadas com quem você é e onde quer chegar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial section">
+  <div class="container">
+    <blockquote class="testimonial-quote reveal">
+      "Eu tinha tudo e sentia nada. A Katti me ajudou a voltar pra mim. Hoje meu negócio é reflexo de quem eu sou — não um escape de quem eu deixei de ser."
+    </blockquote>
+    <cite class="testimonial-author reveal">Empreendedora — E-commerce de moda</cite>
+  </div>
+</section>
+
+<section class="cta-section" id="contato">
+  <div class="container">
+    <h2 class="cta-title reveal">Pronta para se <em>reconectar e crescer</em>?</h2>
+    <p class="cta-body reveal">
+      Agende uma conversa estratégica com a Katti Elleres. 
+      30 minutos para entender onde você se perdeu — e como se encontrar.
+    </p>
+    <a href="https://wa.me/5511999999999?text=Olá%2C%20sou%20empreendedora%20e%20quero%20saber%20sobre%20a%20mentoria" class="cta-button reveal" target="_blank">
+      Agendar conversa estratégica
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p class="f-copy">© 2026 Katti Elleres · K E Representações Ltda</p>
+  <ul class="f-links">
+    <li><a href="https://instagram.com/kattielleres" target="_blank">Instagram</a></li>
+    <li><a href="https://linkedin.com/in/kattielleres" target="_blank">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburger');
+  var navMobile = document.getElementById('navMobile');
+  hamburger.addEventListener('click', function(){
+    hamburger.classList.toggle('active');
+    navMobile.classList.toggle('active');
+    document.body.style.overflow = navMobile.classList.contains('active') ? 'hidden' : '';
+  });
+  function closeMobile(){
+    hamburger.classList.remove('active');
+    navMobile.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('#navMobile a').forEach(function(link){
+    link.addEventListener('click', closeMobile);
+  });
+
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('vis'); });
+  }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+  var lastScroll = 0, navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    var s = window.scrollY;
+    navbar.classList.toggle('scrolled', s > 60);
+    if (window.innerWidth < 1024) {
+      navbar.style.transform = s > lastScroll && s > 180 ? 'translateY(-100%)' : 'translateY(0)';
+    }
+    lastScroll = s;
+  }, {passive: true});
+  navbar.style.transition = 'transform 0.3s, padding 0.3s';
+})();
+</script>
+
+</body>
+</html>
